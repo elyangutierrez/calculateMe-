@@ -12,16 +12,21 @@ struct FourthRowView: View {
     let creamOrangeButtonColor: Color
     @Binding var calculationText: String
     @Binding var darkModeOn: Bool
+    @Binding var currentNumber: String
     
     var body: some View {
         HStack {
             // row 2
             Button(action: {
-                //
+                if (calculationText.firstIndex(of: "0") != nil) {
+                    calculationText = calculationText.replacingOccurrences(of: "0", with: "1")
+                } else {
+                    calculationText += "1"
+                }
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
-                    .frame(width: 80)
+                    .frame(width: 90)
                     .overlay {
                         Text("1")
                             .font(.system(size: 28).bold())
@@ -31,11 +36,15 @@ struct FourthRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                //
+                if (calculationText.firstIndex(of: "0") != nil) {
+                    calculationText = calculationText.replacingOccurrences(of: "0", with: "2")
+                } else {
+                    calculationText += "2"
+                }
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
-                    .frame(width: 80)
+                    .frame(width: 90)
                     .overlay {
                         Text("2")
                             .font(.system(size: 28).bold())
@@ -45,11 +54,15 @@ struct FourthRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                //
+                if (calculationText.firstIndex(of: "0") != nil) {
+                    calculationText = calculationText.replacingOccurrences(of: "0", with: "3")
+                } else {
+                    calculationText += "3"
+                }
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
-                    .frame(width: 80)
+                    .frame(width: 90)
                     .overlay {
                         Text("3")
                             .font(.system(size: 28).bold())
@@ -60,11 +73,11 @@ struct FourthRowView: View {
             
             // Orange Button
             Button(action: {
-                //
+                calculationText += "+"
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)
-                    .frame(width: 80)
+                    .frame(width: 90)
                     .overlay {
                         Image(systemName: "plus")
                             .font(.system(size: 28).bold())
@@ -77,5 +90,5 @@ struct FourthRowView: View {
 }
 
 #Preview {
-    FourthRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true))
+    FourthRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true), currentNumber: .constant(""))
 }

@@ -5,12 +5,14 @@
 //  Created by Elyan Gutierrez on 7/24/24.
 //
 
+import Foundation
 import SwiftUI
 
 struct ContentView: View {
     
-    @State private var calculationText = "Hello"
-    @State private var result = 0
+    @State private var calculationText = "0"
+    @State private var currentNumber = ""
+    @State private var result = 0.0
     @State private var darkModeOn = true
     
     let backgroundColor = Color(red: 0.1, green: 0.11, blue: 0.14)
@@ -21,6 +23,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            
             if darkModeOn == true {
                 backgroundColor
                     .ignoresSafeArea()
@@ -34,7 +37,7 @@ struct ContentView: View {
                     .resizable()
                     .foregroundStyle(lightWhiteButtonColor)
                     .frame(width: 30, height: 30)
-                    .offset(x: 160, y: -320)
+                    .offset(x: 173, y: -320)
             }
             .onTapGesture {
                 darkModeOn.toggle()
@@ -49,10 +52,12 @@ struct ContentView: View {
                 VStack(alignment: .trailing) {
                     
                     Text("\(calculationText)")
+                        .font(.system(size: 28))
                         .foregroundStyle(darkModeOn ? .gray : .black)
                         .padding(.vertical, 7)
                     
-                    Text("\(result)")
+                    
+                    Text("\(result.formatted())")
                         .font(.system(size: 45).bold())
                         .foregroundStyle(darkModeOn ? .white : .black)
                 }
@@ -63,15 +68,15 @@ struct ContentView: View {
                     .frame(height: 35)
                 
                 VStack {
-                    FirstRowView(lightWhiteButtonColor: lightWhiteButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn)
+                    FirstRowView(lightWhiteButtonColor: lightWhiteButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     
-                    SecondRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn)
+                    SecondRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber)
                     
-                    ThirdRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn)
+                    ThirdRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber)
                     
-                    FourthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn)
+                    FourthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber)
                     
-                    FifthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn)
+                    FifthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                 }
                 
                 Spacer()
