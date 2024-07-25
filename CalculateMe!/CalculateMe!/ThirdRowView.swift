@@ -18,11 +18,7 @@ struct ThirdRowView: View {
         HStack {
             // row 2
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "4")
-                } else {
-                    calculationText += "4"
-                }
+                calculationText += "4"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -36,11 +32,7 @@ struct ThirdRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "5")
-                } else {
-                    calculationText += "5"
-                }
+                calculationText += "5"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -54,11 +46,7 @@ struct ThirdRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "6")
-                } else {
-                    calculationText += "6"
-                }
+                calculationText += "6"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -73,11 +61,7 @@ struct ThirdRowView: View {
             
             // Orange Button
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "-")
-                } else {
-                    calculationText += "-"
-                }
+                calculationText += " - "
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)

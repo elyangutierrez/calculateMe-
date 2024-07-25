@@ -19,11 +19,7 @@ struct SecondRowView: View {
         HStack {
             // row 2
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "7")
-                } else {
-                    calculationText += "7"
-                }
+                calculationText += "7"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -38,11 +34,7 @@ struct SecondRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "8")
-                } else {
-                    calculationText += "8"
-                }
+                calculationText += "8"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -56,11 +48,7 @@ struct SecondRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                if (calculationText.firstIndex(of: "0") != nil) {
-                    calculationText = calculationText.replacingOccurrences(of: "0", with: "9")
-                } else {
-                    calculationText += "9"
-                }
+                calculationText += "9"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -75,7 +63,7 @@ struct SecondRowView: View {
             
             // Orange Button
             Button(action: {
-                calculationText += "*"
+                calculationText += " * "
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)

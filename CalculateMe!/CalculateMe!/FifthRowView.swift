@@ -25,16 +25,16 @@ struct FifthRowView: View {
             }) {
                 RoundedRectangle(cornerRadius: 25.0)
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
-                    .frame(width: 170, height: 90)
+                    .frame(width: 190, height: 90)
                     .overlay {
                         Text("0")
                             .font(.system(size: 28).bold())
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal, 35)
                     }
             }
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 5)
             
             Button(action: {
                 calculationText += "."
@@ -71,6 +71,7 @@ struct FifthRowView: View {
         let exp = NSExpression(format: calculationText)
         if let getAnswer = exp.expressionValue(with: nil, context: nil) as? NSNumber {
             result = Double(truncating: getAnswer)
+            calculationText = String(result)
         }
     }
 }

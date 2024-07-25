@@ -10,10 +10,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var calculationText = "0"
+    @State private var calculationText = ""
     @State private var currentNumber = ""
     @State private var result = 0.0
-    @State private var darkModeOn = true
+    @State private var darkModeOn = false
     
     let backgroundColor = Color(red: 0.1, green: 0.11, blue: 0.14)
     
@@ -28,16 +28,18 @@ struct ContentView: View {
                 backgroundColor
                     .ignoresSafeArea()
             } else {
-                Color.white
+//                Color.white
+//                    .ignoresSafeArea()
+                LinearGradient(colors: [lightWhiteButtonColor, creamOrangeButtonColor.opacity(0.95)], startPoint: .top, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
             }
             
             VStack {
                 Image(systemName: darkModeOn ? "sun.max.fill" : "moon.stars.fill")
                     .resizable()
-                    .foregroundStyle(lightWhiteButtonColor)
+                    .foregroundStyle(darkModeOn ? .white : .black)
                     .frame(width: 30, height: 30)
-                    .offset(x: 173, y: -320)
+                    .offset(x: 175, y: -320)
             }
             .onTapGesture {
                 darkModeOn.toggle()
@@ -52,8 +54,8 @@ struct ContentView: View {
                 VStack(alignment: .trailing) {
                     
                     Text("\(calculationText)")
-                        .font(.system(size: 28))
-                        .foregroundStyle(darkModeOn ? .gray : .black)
+                        .font(.system(size: 21))
+                        .foregroundStyle(darkModeOn ? .gray : .black.opacity(0.60))
                         .padding(.vertical, 7)
                     
                     

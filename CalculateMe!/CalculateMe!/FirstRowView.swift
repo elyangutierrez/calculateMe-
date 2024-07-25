@@ -20,7 +20,7 @@ struct FirstRowView: View {
         HStack {
             // row 1
             Button(action: {
-                calculationText = "0"
+                calculationText = ""
                 result = 0
             }) {
                 Circle()
@@ -65,7 +65,7 @@ struct FirstRowView: View {
             
             // Orange Button
             Button(action: {
-                calculationText += "/"
+                calculationText += " / "
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)
