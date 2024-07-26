@@ -13,6 +13,7 @@ struct SecondRowView: View {
     @Binding var calculationText: String
     @Binding var darkModeOn: Bool
     @Binding var currentNumber: String
+    @Binding var result: Double
     
     
     var body: some View {
@@ -63,7 +64,24 @@ struct SecondRowView: View {
             
             // Orange Button
             Button(action: {
-                calculationText += " * "
+                
+                calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if calculationText == "inf" || calculationText == "-inf" {
+                    calculationText = "ERROR"
+                    result = 0
+                } else if calculationText.last == "." {
+                    calculationText += "0"
+                    calculationText += " * "
+                } else if calculationText.last == "*" {
+                    calculationText.removeLast()
+                    calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                } else if calculationText.last == "+" || calculationText.last == "-" || calculationText.last == "/" {
+                    calculationText = "0"
+                    result = 0
+                } else {
+                    calculationText += " * "
+                }
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)
@@ -80,5 +98,5 @@ struct SecondRowView: View {
 }
 
 #Preview {
-    SecondRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(false), currentNumber: .constant(""))
+    SecondRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(false), currentNumber: .constant(""), result: .constant(0))
 }

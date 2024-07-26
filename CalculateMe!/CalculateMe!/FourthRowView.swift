@@ -13,6 +13,7 @@ struct FourthRowView: View {
     @Binding var calculationText: String
     @Binding var darkModeOn: Bool
     @Binding var currentNumber: String
+    @Binding var result: Double
     
     var body: some View {
         HStack {
@@ -61,7 +62,24 @@ struct FourthRowView: View {
             
             // Orange Button
             Button(action: {
-                calculationText += " + "
+                
+                calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if calculationText == "inf" || calculationText == "-inf" {
+                    calculationText = "ERROR"
+                    result = 0
+                } else if calculationText.last == "." {
+                    calculationText += "0"
+                    calculationText += " + "
+                } else if calculationText.last == "+" {
+                    calculationText.removeLast()
+                    calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                } else if calculationText.last == "-" || calculationText.last == "*" || calculationText.last == "/" {
+                    calculationText = "0"
+                    result = 0
+                } else {
+                    calculationText += " + "
+                }
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)
@@ -78,5 +96,5 @@ struct FourthRowView: View {
 }
 
 #Preview {
-    FourthRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true), currentNumber: .constant(""))
+    FourthRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true), currentNumber: .constant(""), result: .constant(0))
 }

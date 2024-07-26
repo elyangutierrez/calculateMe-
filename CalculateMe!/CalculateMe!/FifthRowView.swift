@@ -37,7 +37,14 @@ struct FifthRowView: View {
             .padding(.horizontal, 5)
             
             Button(action: {
-                calculationText += "."
+                
+                calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if calculationText.last == "." {
+                    calculationText.removeLast()
+                } else {
+                    calculationText += "."
+                }
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
@@ -68,10 +75,21 @@ struct FifthRowView: View {
     }
     
     func solveExpression() {
+        
+        calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if let lastChar = calculationText.last, "+-*/.".contains(lastChar) {
+            calculationText += "0"
+        }
+        
         let exp = NSExpression(format: calculationText)
+        
+        print(calculationText.last!)
+        
         if let getAnswer = exp.expressionValue(with: nil, context: nil) as? NSNumber {
             result = Double(truncating: getAnswer)
             calculationText = String(result)
+            print("Calculated.")
         }
     }
 }

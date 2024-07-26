@@ -13,7 +13,7 @@ struct ContentView: View {
     @State private var calculationText = ""
     @State private var currentNumber = ""
     @State private var result = 0.0
-    @State private var darkModeOn = false
+    @State private var darkModeOn = true
     
     let backgroundColor = Color(red: 0.1, green: 0.11, blue: 0.14)
     
@@ -23,7 +23,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            
             if darkModeOn == true {
                 backgroundColor
                     .ignoresSafeArea()
@@ -55,7 +54,7 @@ struct ContentView: View {
                     
                     Text("\(calculationText)")
                         .font(.system(size: 21))
-                        .foregroundStyle(darkModeOn ? .gray : .black.opacity(0.60))
+                        .foregroundStyle(darkModeOn ? .gray : .black)
                         .padding(.vertical, 7)
                     
                     
@@ -72,17 +71,20 @@ struct ContentView: View {
                 VStack {
                     FirstRowView(lightWhiteButtonColor: lightWhiteButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     
-                    SecondRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber)
+                    SecondRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     
-                    ThirdRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber)
+                    ThirdRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     
-                    FourthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber)
+                    FourthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     
                     FifthRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                 }
                 
                 Spacer()
             }
+        }
+        .onChange(of: calculationText) {
+            print(calculationText)
         }
     }
 }

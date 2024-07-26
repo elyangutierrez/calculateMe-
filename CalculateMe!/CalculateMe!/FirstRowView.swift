@@ -65,7 +65,25 @@ struct FirstRowView: View {
             
             // Orange Button
             Button(action: {
-                calculationText += " / "
+                
+                calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if calculationText == "inf" || calculationText == "-inf" {
+                    calculationText = "ERROR"
+                    result = 0
+                } else if calculationText.last == "/" {
+                    print("Prevented //")
+                    calculationText.removeLast()
+                    calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+                } else if calculationText.last == "*" || calculationText.last == "+" || calculationText.last == "-" {
+                    calculationText = "0"
+                    result = 0
+                } else if calculationText.last == "." {
+                    calculationText += "0"
+                    calculationText += " / "
+                } else {
+                    calculationText += " / "
+                }
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)
@@ -86,18 +104,16 @@ struct FirstRowView: View {
     }
     
     func toggleNegation() {
-        if let number = Double(currentNumber) {
-            let negatedNumber = -number
-            calculationText = calculationText.replacingOccurrences(of: currentNumber, with: "\(negatedNumber)")
-            currentNumber = "\(negatedNumber)"
-        }
+        calculationText.insert(contentsOf: "-", at: calculationText.startIndex)
     }
     
     func doPercentage() {
-        if let number = Double(currentNumber) {
-            let percentedNumber = Double(number / 100)
-            calculationText = calculationText.replacingOccurrences(of: currentNumber, with: "\(percentedNumber)")
-            currentNumber = "\(percentedNumber)"
+        let exp = NSExpression(format: calculationText)
+        var placeholder = 0.0
+        if let getAnswer = exp.expressionValue(with: nil, context: nil) as? NSNumber {
+            placeholder = Double(truncating: getAnswer) / 100
+            calculationText = String(placeholder)
+            result = placeholder
         }
     }
 }
