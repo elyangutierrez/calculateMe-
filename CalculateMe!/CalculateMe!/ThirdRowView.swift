@@ -91,6 +91,7 @@ struct ThirdRowView: View {
                     }
             }
             .padding(.horizontal, 3)
+            .disabled(calculationText == "")
         }
     }
 }

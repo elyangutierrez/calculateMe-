@@ -91,6 +91,7 @@ struct FourthRowView: View {
                     }
             }
             .padding(.horizontal, 3)
+            .disabled(calculationText == "")
         }
     }
 }

@@ -61,6 +61,7 @@ struct FirstRowView: View {
                     }
             }
             .padding(.horizontal, 3)
+            .disabled(calculationText == "" || calculationText == "-")
             
             
             // Orange Button
@@ -95,6 +96,7 @@ struct FirstRowView: View {
                     }
             }
             .padding(.horizontal, 3)
+            .disabled(calculationText == "")
         }
     }
     
@@ -110,10 +112,18 @@ struct FirstRowView: View {
     func doPercentage() {
         let exp = NSExpression(format: calculationText)
         var placeholder = 0.0
-        if let getAnswer = exp.expressionValue(with: nil, context: nil) as? NSNumber {
-            placeholder = Double(truncating: getAnswer) / 100
-            calculationText = String(placeholder)
-            result = placeholder
+        
+        
+        
+        if calculationText == "0" || calculationText == "" {
+            calculationText = "0"
+            result = 0
+        } else {
+            if let getAnswer = exp.expressionValue(with: nil, context: nil) as? NSNumber {
+                placeholder = Double(truncating: getAnswer) / 100
+                calculationText = String(placeholder)
+                result = placeholder
+            }
         }
     }
 }

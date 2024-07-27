@@ -21,15 +21,15 @@ struct ContentView: View {
     let darkGreyButtonColor = Color(red: 0.19, green: 0.19, blue: 0.19)
     let creamOrangeButtonColor = Color(red: 0.8, green: 0.5, blue: 0.1)
     
+    @State private var showHistoryView = false
+    
     var body: some View {
         ZStack {
             if darkModeOn == true {
                 backgroundColor
                     .ignoresSafeArea()
             } else {
-//                Color.white
-//                    .ignoresSafeArea()
-                LinearGradient(colors: [lightWhiteButtonColor, creamOrangeButtonColor.opacity(0.95)], startPoint: .top, endPoint: .bottomTrailing)
+                LinearGradient(colors: [lightWhiteButtonColor, creamOrangeButtonColor.opacity(0.80)], startPoint: .top, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
             }
             
@@ -57,10 +57,10 @@ struct ContentView: View {
                         .foregroundStyle(darkModeOn ? .gray : .black)
                         .padding(.vertical, 7)
                     
-                    
                     Text("\(result.formatted())")
                         .font(.system(size: 45).bold())
                         .foregroundStyle(darkModeOn ? .white : .black)
+                        .lineLimit(1)
                 }
                 .frame(maxWidth: .infinity, alignment: .topTrailing)
                 .padding(.horizontal, 17)
@@ -69,6 +69,7 @@ struct ContentView: View {
                     .frame(height: 35)
                 
                 VStack {
+                    
                     FirstRowView(lightWhiteButtonColor: lightWhiteButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     
                     SecondRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
