@@ -40,8 +40,12 @@ struct FifthRowView: View {
                 
                 calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
                 
+                let lastThreeChars = calculationText.suffix(3)
+                
                 if calculationText.last == "." {
                     calculationText.removeLast()
+                } else if lastThreeChars.contains(".") {
+                    calculationText = calculationText
                 } else {
                     calculationText += "."
                 }
@@ -78,13 +82,21 @@ struct FifthRowView: View {
         
         calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if calculationText == "ERROR." {
+        let lastTwoChars = calculationText.suffix(2)
+        
+        if lastTwoChars.contains("(") || lastTwoChars.contains(")") {
             calculationText = "ERROR"
             result = 0
         }
         
+        if calculationText.contains("ERROR.") {
+            calculationText = "ERROR"
+            result = 0
+        }
         
         if let lastChar = calculationText.last, "+-*/.".contains(lastChar) {
+            calculationText += "0"
+        } else if let lastChar = calculationText.last, ".".contains(lastChar) {
             calculationText += "0"
         } else if calculationText.contains("ERROR") {
             calculationText = "ERROR"

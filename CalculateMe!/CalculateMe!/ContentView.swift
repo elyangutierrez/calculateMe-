@@ -22,6 +22,7 @@ struct ContentView: View {
     let creamOrangeButtonColor = Color(red: 0.8, green: 0.5, blue: 0.1)
     
     @State private var showHistoryView = false
+    @State private var showOtherOperators = false
     
     var body: some View {
         ZStack {
@@ -66,11 +67,22 @@ struct ContentView: View {
                 .padding(.horizontal, 17)
                 
                 Spacer()
-                    .frame(height: 35)
+                    .frame(height: 30)
+                
+                VStack(alignment: .leading) {
+                    Text("Other")
+                        .font(.system(size: 18).bold())
+                        .foregroundStyle(darkModeOn ? .white : .black)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 26.5)
+                .onTapGesture {
+                    showOtherOperators.toggle()
+                }
                 
                 VStack {
                     
-                    FirstRowView(lightWhiteButtonColor: lightWhiteButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
+                    FirstRowView(lightWhiteButtonColor: lightWhiteButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result, moreOperators: $showOtherOperators)
                     
                     SecondRowView(darkGreyButtonColor: darkGreyButtonColor, creamOrangeButtonColor: creamOrangeButtonColor, calculationText: $calculationText, darkModeOn: $darkModeOn, currentNumber: $currentNumber, result: $result)
                     

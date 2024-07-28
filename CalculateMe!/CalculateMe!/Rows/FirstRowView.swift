@@ -15,6 +15,7 @@ struct FirstRowView: View {
     @Binding var darkModeOn: Bool
     @Binding var currentNumber: String
     @Binding var result: Double
+    @Binding var moreOperators: Bool
     
     var body: some View {
         HStack {
@@ -34,34 +35,73 @@ struct FirstRowView: View {
             }
             .padding(.horizontal, 3)
             
-            Button(action: {
-                toggleNegation()
-            }) {
-                Circle()
-                    .fill(lightWhiteButtonColor)
-                    .frame(width: 90)
-                    .overlay {
-                        Image(systemName: "plus.forwardslash.minus")
-                            .font(.system(size: 28).bold())
-                            .foregroundStyle(.black)
-                    }
+            if moreOperators {
+                Button(action: {
+                    calculationText += "("
+                }) {
+                    Circle()
+                        .fill(lightWhiteButtonColor)
+                        .frame(width: 90)
+                        .overlay {
+                            Text("(")
+                                .font(.system(size: 28).bold())
+                                .foregroundStyle(.black)
+                        }
+                }
+                .padding(.horizontal, 3)
+            } else {
+                Button(action: {
+                    toggleNegation()
+                }) {
+                    Circle()
+                        .fill(lightWhiteButtonColor)
+                        .frame(width: 90)
+                        .overlay {
+                            Image(systemName: "plus.forwardslash.minus")
+                                .font(.system(size: 28).bold())
+                                .foregroundStyle(.black)
+                        }
+                }
+                .padding(.horizontal, 3)
             }
-            .padding(.horizontal, 3)
             
-            Button(action: {
-                doPercentage()
-            }) {
-                Circle()
-                    .fill(lightWhiteButtonColor)
-                    .frame(width: 90)
-                    .overlay {
-                        Text("%")
-                            .font(.system(size: 28).bold())
-                            .foregroundStyle(.black)
+            if moreOperators {
+                Button(action: {
+                    calculationText += ")"
+                }) {
+                    Circle()
+                        .fill(lightWhiteButtonColor)
+                        .frame(width: 90)
+                        .overlay {
+                            Text(")")
+                                .font(.system(size: 28).bold())
+                                .foregroundStyle(.black)
+                        }
+                }
+                .padding(.horizontal, 3)
+            } else {
+                Button(action: {
+                    let lastTwoChars = calculationText.suffix(2)
+                    
+                    if lastTwoChars.contains(".") {
+                        calculationText = calculationText
+                        result = 0
+                    } else {
+                        doPercentage()
                     }
+                }) {
+                    Circle()
+                        .fill(lightWhiteButtonColor)
+                        .frame(width: 90)
+                        .overlay {
+                            Text("%")
+                                .font(.system(size: 28).bold())
+                                .foregroundStyle(.black)
+                        }
+                }
+                .padding(.horizontal, 3)
+                .disabled(calculationText == "" || calculationText == "-")
             }
-            .padding(.horizontal, 3)
-            .disabled(calculationText == "" || calculationText == "-")
             
             
             // Orange Button
@@ -96,7 +136,7 @@ struct FirstRowView: View {
                     }
             }
             .padding(.horizontal, 3)
-            .disabled(calculationText == "")
+            .disabled(calculationText == "" || calculationText.last == "(")
         }
     }
     
@@ -113,8 +153,6 @@ struct FirstRowView: View {
         let exp = NSExpression(format: calculationText)
         var placeholder = 0.0
         
-        
-        
         if calculationText == "0" || calculationText == "" {
             calculationText = "0"
             result = 0
@@ -129,5 +167,5 @@ struct FirstRowView: View {
 }
 
 #Preview {
-    FirstRowView(lightWhiteButtonColor: Color.white, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true), currentNumber: .constant(""), result: .constant(0))
+    FirstRowView(lightWhiteButtonColor: Color.white, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true), currentNumber: .constant(""), result: .constant(0), moreOperators: .constant(true))
 }

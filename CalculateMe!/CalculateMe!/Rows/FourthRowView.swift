@@ -1,5 +1,5 @@
 //
-//  SecondRowView.swift
+//  FourthRowView.swift
 //  CalculateMe!
 //
 //  Created by Elyan Gutierrez on 7/24/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SecondRowView: View {
+struct FourthRowView: View {
     let darkGreyButtonColor: Color
     let creamOrangeButtonColor: Color
     @Binding var calculationText: String
@@ -15,33 +15,17 @@ struct SecondRowView: View {
     @Binding var currentNumber: String
     @Binding var result: Double
     
-    
     var body: some View {
         HStack {
             // row 2
             Button(action: {
-                calculationText += "7"
+                calculationText += "1"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
                     .frame(width: 90)
                     .overlay {
-                        Text("7")
-                            .font(.system(size: 28).bold())
-                            .foregroundStyle(.white)
-                    }
-                
-            }
-            .padding(.horizontal, 3)
-            
-            Button(action: {
-                calculationText += "8"
-            }) {
-                Circle()
-                    .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
-                    .frame(width: 90)
-                    .overlay {
-                        Text("8")
+                        Text("1")
                             .font(.system(size: 28).bold())
                             .foregroundStyle(.white)
                     }
@@ -49,13 +33,27 @@ struct SecondRowView: View {
             .padding(.horizontal, 3)
             
             Button(action: {
-                calculationText += "9"
+                calculationText += "2"
             }) {
                 Circle()
                     .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
                     .frame(width: 90)
                     .overlay {
-                        Text("9")
+                        Text("2")
+                            .font(.system(size: 28).bold())
+                            .foregroundStyle(.white)
+                    }
+            }
+            .padding(.horizontal, 3)
+            
+            Button(action: {
+                calculationText += "3"
+            }) {
+                Circle()
+                    .fill(darkModeOn ? darkGreyButtonColor : darkGreyButtonColor.opacity(0.60))
+                    .frame(width: 90)
+                    .overlay {
+                        Text("3")
                             .font(.system(size: 28).bold())
                             .foregroundStyle(.white)
                     }
@@ -72,32 +70,32 @@ struct SecondRowView: View {
                     result = 0
                 } else if calculationText.last == "." {
                     calculationText += "0"
-                    calculationText += " * "
-                } else if calculationText.last == "*" {
+                    calculationText += " + "
+                } else if calculationText.last == "+" {
                     calculationText.removeLast()
                     calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
-                } else if calculationText.last == "+" || calculationText.last == "-" || calculationText.last == "/" {
+                } else if calculationText.last == "-" || calculationText.last == "*" || calculationText.last == "/" {
                     calculationText = "0"
                     result = 0
                 } else {
-                    calculationText += " * "
+                    calculationText += " + "
                 }
             }) {
                 Circle()
                     .fill(creamOrangeButtonColor)
                     .frame(width: 90)
                     .overlay {
-                        Image(systemName: "multiply")
+                        Image(systemName: "plus")
                             .font(.system(size: 28).bold())
                             .foregroundStyle(.white)
                     }
             }
             .padding(.horizontal, 3)
-            .disabled(calculationText == "")
+            .disabled(calculationText == "" || calculationText.last == "(")
         }
     }
 }
 
 #Preview {
-    SecondRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(false), currentNumber: .constant(""), result: .constant(0))
+    FourthRowView(darkGreyButtonColor: Color.gray, creamOrangeButtonColor: Color.orange, calculationText: .constant(""), darkModeOn: .constant(true), currentNumber: .constant(""), result: .constant(0))
 }

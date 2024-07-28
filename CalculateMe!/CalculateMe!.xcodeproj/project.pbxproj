@@ -63,11 +63,7 @@
 			children = (
 				727A47D22C51B88A00D41AC7 /* CalculateMe_App.swift */,
 				727A47D42C51B88A00D41AC7 /* ContentView.swift */,
-				727A47E02C51CEEE00D41AC7 /* FirstRowView.swift */,
-				727A47E22C51CEF300D41AC7 /* SecondRowView.swift */,
-				727A47E42C51CEFA00D41AC7 /* ThirdRowView.swift */,
-				727A47E62C51CF0000D41AC7 /* FourthRowView.swift */,
-				727A47E82C51CF0400D41AC7 /* FifthRowView.swift */,
+				727A47EC2C56B83F00D41AC7 /* Rows */,
 				727A47D62C51B88B00D41AC7 /* Assets.xcassets */,
 				727A47D82C51B88B00D41AC7 /* Preview Content */,
 			);
@@ -80,6 +76,18 @@
 				727A47D92C51B88B00D41AC7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		727A47EC2C56B83F00D41AC7 /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				727A47E02C51CEEE00D41AC7 /* FirstRowView.swift */,
+				727A47E22C51CEF300D41AC7 /* SecondRowView.swift */,
+				727A47E42C51CEFA00D41AC7 /* ThirdRowView.swift */,
+				727A47E62C51CF0000D41AC7 /* FourthRowView.swift */,
+				727A47E82C51CF0400D41AC7 /* FifthRowView.swift */,
+			);
+			path = Rows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
