@@ -78,8 +78,53 @@ struct FifthRowView: View {
         
         calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
         
+        if calculationText == "ERROR." {
+            calculationText = "ERROR"
+            result = 0
+        }
+        
+        
         if let lastChar = calculationText.last, "+-*/.".contains(lastChar) {
             calculationText += "0"
+        } else if calculationText.contains("ERROR") {
+            calculationText = "ERROR"
+            result = 0
+        }
+        
+        switch calculationText {
+        case "0.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "1.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "2.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "3.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "4.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "5.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "6.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "7.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "8.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        case "9.0 / 0":
+            calculationText = "ERROR"
+            result = 0
+        default:
+            calculationText = calculationText
+            result = 0
         }
         
         let exp = NSExpression(format: calculationText)
