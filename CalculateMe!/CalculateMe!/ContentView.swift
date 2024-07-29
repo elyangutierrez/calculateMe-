@@ -98,6 +98,7 @@ struct ContentView: View {
         }
         .onChange(of: calculationText) {
             print(calculationText)
+            print(calculationText.last ?? "None")
         }
     }
 }

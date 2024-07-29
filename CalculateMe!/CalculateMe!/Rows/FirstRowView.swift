@@ -79,6 +79,7 @@ struct FirstRowView: View {
                         }
                 }
                 .padding(.horizontal, 3)
+                .disabled(calculationText == "")
             } else {
                 Button(action: {
                     let lastTwoChars = calculationText.suffix(2)

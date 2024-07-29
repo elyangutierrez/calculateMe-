@@ -75,12 +75,15 @@ struct FifthRowView: View {
                     }
             }
             .padding(.horizontal, 3)
+            .disabled(calculationText.last == "+" || calculationText.last == "-" || calculationText.last == "*" || calculationText.last == "/")
         }
     }
     
     func solveExpression() {
         
         calculationText = calculationText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        print("Last char for solving: \(calculationText.last ?? "X")")
         
         let lastTwoChars = calculationText.suffix(2)
         
@@ -96,11 +99,19 @@ struct FifthRowView: View {
         
         if let lastChar = calculationText.last, "+-*/.".contains(lastChar) {
             calculationText += "0"
+            print("Ended here.")
         } else if let lastChar = calculationText.last, ".".contains(lastChar) {
             calculationText += "0"
         } else if calculationText.contains("ERROR") {
             calculationText = "ERROR"
             result = 0
+        }
+        
+        let openParenthesesCount = calculationText.filter { $0 == "(" }.count
+        let closeParenthesesCount = calculationText.filter { $0 == ")" }.count
+        
+        if openParenthesesCount > closeParenthesesCount {
+            calculationText += String(repeating: ")", count: openParenthesesCount-closeParenthesesCount)
         }
         
         switch calculationText {
