@@ -147,7 +147,8 @@ struct FirstRowView: View {
     }
     
     func toggleNegation() {
-        calculationText.insert(contentsOf: "-", at: calculationText.startIndex)
+//        calculationText.insert(contentsOf: "-", at: calculationText.startIndex)
+        calculationText += "-"
     }
     
     func doPercentage() {
