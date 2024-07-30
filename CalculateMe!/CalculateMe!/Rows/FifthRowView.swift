@@ -87,7 +87,9 @@ struct FifthRowView: View {
         
         let lastTwoChars = calculationText.suffix(2)
         
-        if lastTwoChars.contains("(") || lastTwoChars.contains(")") {
+        let lengthOfExpression = calculationText.count
+        
+        if lengthOfExpression <= 2 && lastTwoChars.contains("(") || lengthOfExpression <= 2 && lastTwoChars.contains(")") {
             calculationText = "ERROR"
             result = 0
         }
